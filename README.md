@@ -11,16 +11,16 @@ Para executar esse projeto é necessário que o Docker esteja instalado.
 
 Execute os passos abaixo para executar este projeto:
 
-# Baixar o projeto
+## Baixar o projeto
 git clone https://github.com/MarcosGray/email-com-workers.git
 
-# Executar o projeto com 3 workers levantados
+## Executar o projeto com 3 workers levantados
 docker-compose up -d --scale worker=3
 
-# Ver o log de funcionamento de todos os serviços
+## Ver o log de funcionamento de todos os serviços
 docker-compose logs -f -t
 
-# Ver o log de funcionamento apenas dos workers
+## Ver o log de funcionamento apenas dos workers
 docker-compose logs -f -t workers
 
 
