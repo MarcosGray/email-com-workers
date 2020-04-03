@@ -10,6 +10,7 @@ Para executar esse projeto é necessário que o Docker já esteja instalado.
 - Um container com o Redis e 3 workers executando o processo de envio de email
 
 Execute os passos abaixo para executar este projeto:
+
 Os passos 3 e 3.1 são opcionais, podem ser usado o 3 ou 3.1 de acordo com o seu desejo.
 
 ## Passo 1: Baixar o projeto
