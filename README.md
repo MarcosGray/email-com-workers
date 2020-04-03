@@ -21,10 +21,12 @@ docker-compose up -d --scale worker=3
 
 ### Passo 3: Ver o log de funcionamento de todos os serviços (opcional)
 - O comando abaixo mostra todos os serviços que foram levantados.
+
 docker-compose logs -f -t
 
 ### Passo 3.1: Ver o log de funcionamento apenas dos workers (opcional)
 - O comando abaixo mostra apenas os workers e os logs gerados por eles, quando são chamados.
+
 docker-compose logs -f -t workers
 
 ### Para ver os containers que foram levantados use:
