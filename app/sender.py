@@ -1,28 +1,46 @@
 import psycopg2
-from bottle import route, run, request
+import redis
+import json
+import os
+from bottle import Bottle, request
 
-DSN = 'dbname=email_sender user=postgres host=db'
-SQL = 'INSERT INTO emails (assunto, mensagem) VALUES (%s, %s)'
 
-def register_message(assunto, mensagem):
-    conn = psycopg2.connect(DSN)
-    cur = conn.cursor()
-    cur.execute(SQL, (assunto, mensagem))
-    conn.commit()
-    cur.close()
-    conn.close()
+class Sender(Bottle):
+    def __init__(self):
+        super().__init__()
+        self.route('/', method='POST', callback=self.send)
 
-    print('Mensagem registrada !')
+        redis_host = os.getenv('REDIS_HOST', 'queue')
+        self.fila = redis.StrictRedis(host=redis_host, port=6379, db=0)
+        
+        db_host = os.getenv('DB_HOST', 'db')
+        db_name = os.getenv('DB_NAME', 'sender')
+        db_user = os.getenv('DB_USER', 'postgres')
+        db_password = os.getenv('DB_PASSWORD', 'postgres')    
+        dsn = f'dbname={db_name} user={db_user} password={db_password} host={db_host}'
+        self.conn = psycopg2.connect(dsn)
 
-@route('/', method='POST')
-def send():
-    assunto = request.forms.get('assunto')
-    mensagem = request.forms.get('mensagem')
+    def register_message(self, assunto, mensagem):
+        SQL = 'INSERT INTO emails (assunto, mensagem) VALUES (%s, %s)'
+        cur = self.conn.cursor()
+        cur.execute(SQL, (assunto, mensagem))
+        self.conn.commit()
+        cur.close()
 
-    register_message(assunto, mensagem)
-    return 'Mensagem enfileirada ! Assunto: {} Mensagem: {}'.format(
-        assunto, mensagem
-    )
+        msg = {'assunto': assunto, 'mensagem': mensagem}
+        self.fila.rpush('sender', json.dumps(msg))
+
+        print('Mensagem registrada !')
+
+    def send(self):
+        assunto = request.forms.get('assunto')
+        mensagem = request.forms.get('mensagem')
+
+        self.register_message(assunto, mensagem)
+        return 'Mensagem enfileirada ! Assunto: {} Mensagem: {}'.format(
+            assunto, mensagem
+        )
 
 if __name__ == '__main__':
-    run(host='0.0.0.0', port=8000, debug=True)
+    sender = Sender()
+    sender.run(host='0.0.0.0', port=8080, debug=True)
