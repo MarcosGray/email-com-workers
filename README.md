@@ -38,6 +38,7 @@ docker-compose exec db psql -U postgres -d email_sender -c 'select * from emails
 
 ### Como posso ver o projeto funcionando
 Abra uma página no seu navegador usando http://localhost
+
 Em seguida preencha os campos e envie o formulario clicando em enviar.
 
 ### Erro que pode surgir
