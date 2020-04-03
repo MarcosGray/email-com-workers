@@ -1,9 +1,9 @@
 # email-com-workers
 Este é um projeto de estudo com o Docker com objetivo de aprender como montar vários contêineres com programas específicos se comunicando para a execução do envio de emails.
 
-Para executar esse projeto é necessário que o Docker esteja instalado.
+Para executar esse projeto é necessário que o Docker já esteja instalado.
 
-# Estrutura do projeto
+## Estrutura do projeto
 - Um container frontend com um servidor nginx e uma pagina html com formulário
 - Um container backend com python 3.6
 - Um container com banco de dados Postgres 9.6
