@@ -35,7 +35,7 @@ docker-compose ps
 ### Parando a execução de todos os containers (Projeto inteiro)
 docker-compose down
 
-### Para ver as informações salvas no banco Postres
+### Para ver as informações salvas no banco Postgres
 docker-compose exec db psql -U postgres -d email_sender -c 'select * from emails' 
 
 ### Como posso ver o projeto funcionando
