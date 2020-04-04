@@ -1,13 +1,19 @@
 # email-com-workers
 Este é um projeto de estudo com o Docker com objetivo de aprender como montar vários contêineres com programas específicos se comunicando para a execução do envio de emails.
 
+### Entendendo o projeto
+
+A idéia desse projeto é mostrar como o docker funcionaria se aplicado em um servidor de e-mails, onde, várias pessoas fazem o preenchimento de um formulário e ao enviar estas informações, estas são armazenadas em um banco postgres e armazenada também em uma fila, nesse casso, foram levantados 3 workers que ficaram lendo a fila e enviando as informações gravadas.
+
+A importancia aqui está em como fazer os containers se comunicarem, o uso do proxy reverso e como escalar algum processo.
+
 Para executar esse projeto é necessário que o Docker já esteja instalado.
 
 ### Estrutura do projeto
 - Um container frontend com um servidor nginx e uma pagina html com formulário
 - Um container backend com python 3.6
 - Um container com banco de dados Postgres 9.6
-- Um container com o Redis e 3 workers executando o processo de envio de email
+- Um container com o Redis e 3 workers executando o processo de fila e envio de email (representando apenas a idéia)
 
 Execute os passos abaixo para executar este projeto:
 
@@ -44,7 +50,7 @@ Abra uma página no seu navegador usando http://localhost
 Em seguida preencha os campos e envie o formulario clicando em enviar.
 
 ### Erro que pode surgir
-Se por acaso ao enviar o formulario o navegar mostrar o erro 404 not found, esse problema pode estar relacionado a você já ter um outro servidor default ativo no seu sistema operacional.
+Se por acaso ao enviar o formulario o navegar mostrar o erro 404 not found, esse problema pode está relacionado a você já ter um outro servidor default ativo no seu sistema operacional.
 
 Para solucionar esse problema, desabilite-o e rode novamente os comando para levantar o projeto usando o código no passo 2.
 
