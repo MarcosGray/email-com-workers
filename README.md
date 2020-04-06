@@ -20,7 +20,7 @@ Execute os passos abaixo para executar este projeto:
 Os passos 3 e 3.1 são opcionais, podem ser usado o 3 ou 3.1 de acordo com o seu desejo.
 
 ### Passo 1: Baixar o projeto
-git clone https://github.com/MarcosGray/email-com-workers.git
+<code>git clone https://github.com/MarcosGray/email-com-workers.git</code>
 
 ### Passo 2: Executar o projeto com 3 workers levantados
 docker-compose up -d --scale worker=3
