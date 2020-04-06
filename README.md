@@ -23,26 +23,26 @@ Os passos 3 e 3.1 são opcionais, podem ser usado o 3 ou 3.1 de acordo com o seu
 <code>git clone https://github.com/MarcosGray/email-com-workers.git</code>
 
 ### Passo 2: Executar o projeto com 3 workers levantados
-docker-compose up -d --scale worker=3
+<code> docker-compose up -d --scale worker=3 </code>
 
 ### Passo 3: Ver o log de funcionamento de todos os serviços (opcional)
 - O comando abaixo mostra todos os serviços que foram levantados.
 
-docker-compose logs -f -t
+<code> docker-compose logs -f -t </code>
 
 ### Passo 3.1: Ver o log de funcionamento apenas dos workers (opcional)
 - O comando abaixo mostra apenas os workers e os logs gerados por eles, quando são chamados.
 
-docker-compose logs -f -t workers
+<code> docker-compose logs -f -t workers </code>
 
 ### Para ver os containers que foram levantados use:
-docker-compose ps
+<code> docker-compose ps </code>
 
 ### Parando a execução de todos os containers (Projeto inteiro)
-docker-compose down
+<code> docker-compose down </code>
 
 ### Para ver as informações salvas no banco Postgres
-docker-compose exec db psql -U postgres -d email_sender -c 'select * from emails' 
+<code> docker-compose exec db psql -U postgres -d email_sender -c 'select * from emails' </code>
 
 ### Como posso ver o projeto funcionando
 Abra uma página no seu navegador usando http://localhost
